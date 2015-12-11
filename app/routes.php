@@ -13,29 +13,11 @@
 
 Route::get('/', function()
 {
-	return View::make('index');
+	return "Hello";
 });
 
-Route::post('/', 'StudentController@login');
+Route::post('/register','StudentController@register');
 
-Route::get('/point', 'StudentController@watch');
+//Route::post('/', 'StudentController@login');
 
-Route::get('/logout', 'StudentController@logout');
 
-Route::get('/admin', function()
-{
-  return View::make('admin.index');  
-});
-
-Route::post('/admin', 'AdminController@login');
-
-Route::get('/admin/point', 'AdminController@point');
-Route::post('/admin/point', 'AdminController@write');
-
-Route::get('/admin/dashpoint','AdminController@dashpoint');
-
-Route::get('/admin/{auth}', function($auth)
-{
-  $auth=Hash::make($auth);
-  return $auth;
-});

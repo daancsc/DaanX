@@ -55,9 +55,9 @@ return array(
 		'mysql' => array(
 			'driver'    => 'mysql',
 			'host'      => 'localhost',
-			'database'  => 'coldcamp',
-			'username'  => 'coldcamp',
-			'password'  => '7e7tDJE2mYaub5K7',
+			'database'  => 'DaanX',
+			'username'  => 'DaanX',
+			'password'  => 'ffMmQ2Nze2VNsHEn',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',
