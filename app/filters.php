@@ -85,3 +85,11 @@ Route::filter('csrf', function()
 		throw new Illuminate\Session\TokenMismatchException;
 	}
 });
+
+Route::filter('stu_login',function()
+{
+    $auth=Input::get("auth");
+    if(Student::where("auth", "=", $auth)->count() == 0){
+        return "Not User";
+    }
+});

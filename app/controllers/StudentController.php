@@ -26,9 +26,16 @@ class StudentController extends BaseController {
         $student->nick=$nick;
         $student->email=$email;
         $student->account=$id;
-        if(Student::where())
-		$student->auth=str_random(20);
-		return View::make('hello');
+		$auth=str_random(20);
+		while(true) {
+			if (Student::where("auth", "=", $auth)->count() == 0) {
+				$student->auth = $auth;
+				break;
+			} else {$auth = str_random(20);}
+		}
+		$student->save();
+
+		return $auth;
 	}
 
 }
