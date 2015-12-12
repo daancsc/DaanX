@@ -17,7 +17,17 @@ class StudentController extends BaseController {
 
 	public function register()
 	{
-		$name=Input::get('stu_name');	
+		$id=Input::get('stu_id');
+		$name=Input::get('stu_name');
+        $nick=Input::get('stu_nick');
+        $email=Input::get('stu_email');
+        $student=new Student;
+        $student->name=$name;
+        $student->nick=$nick;
+        $student->email=$email;
+        $student->account=$id;
+        if(Student::where())
+		$student->auth=str_random(20);
 		return View::make('hello');
 	}
 
