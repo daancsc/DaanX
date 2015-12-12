@@ -21,21 +21,33 @@ class StudentController extends BaseController {
 		$name=Input::get('stu_name');
         $nick=Input::get('stu_nick');
         $email=Input::get('stu_email');
-        $student=new Student;
-        $student->name=$name;
-        $student->nick=$nick;
-        $student->email=$email;
-        $student->account=$id;
-		$auth=str_random(20);
-		while(true) {
-			if (Student::where("auth", "=", $auth)->count() == 0) {
-				$student->auth = $auth;
-				break;
-			} else {$auth = str_random(20);}
-		}
-		$student->save();
+		if(Student::where("account", "=", $id)->count()>0){
+			$student=Student::where("account", "=", $id)->first();
+            $auth=str_random(20);
+            while(true) {
+                if (Student::where("auth", "=", $auth)->count() == 1) {
+                    $student->auth = $auth;
+                    break;
+                } else {$auth = str_random(20);}
+            }
+			return $auth;
+		}else{
+			$student=new Student;
+			$student->name=$name;
+			$student->nick=$nick;
+			$student->email=$email;
+			$student->account=$id;
+			$auth=str_random(20);
+			while(true) {
+				if (Student::where("auth", "=", $auth)->count() == 0) {
+					$student->auth = $auth;
+					break;
+				} else {$auth = str_random(20);}
+			}
+			$student->save();
 
-		return $auth;
+			return $auth;
+		}
 	}
 
 }
