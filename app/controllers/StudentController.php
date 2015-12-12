@@ -23,13 +23,7 @@ class StudentController extends BaseController {
         $email=Input::get('stu_email');
 		if(Student::where("account", "=", $id)->count()>0){
 			$student=Student::where("account", "=", $id)->first();
-            $auth=str_random(20);
-            while(true) {
-                if (Student::where("auth", "=", $auth)->count() == 1) {
-                    $student->auth = $auth;
-                    break;
-                } else {$auth = str_random(20);}
-            }
+            $auth=$student->auth;
 			return $auth;
 		}else{
 			$student=new Student;
