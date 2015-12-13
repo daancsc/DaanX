@@ -44,4 +44,18 @@ class StudentController extends BaseController {
 		}
 	}
 
+	public function forumget($page){
+        $topics=Topic::take(10)->skip(($page-1)*10);
+        for($i=0;$i<10;$i++){
+            $writer=Student::find($topics[$i]->stu_id);
+            $export[]=array(
+                "title"=>urlencode($topics[$i]->title),
+                "writer"=>urlencode($writer->nick),
+                "body"=>urlencode($topics[$i]->body),
+                "file"=>urlencode($topics[$i]->file)
+            );
+        }
+        return json_encode(urldecode($export));
+	}
+
 }

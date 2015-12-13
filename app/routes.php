@@ -21,6 +21,7 @@ Route::post('/register','StudentController@register');
 Route::group(array('before' => 'stu_login'), function()
 {
 //	Route::get('/student','RouteController@chooselist');
+	Route::get('/forum/main/{page}','StudentController@forumget');
 
 });
 
