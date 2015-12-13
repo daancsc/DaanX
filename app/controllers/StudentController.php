@@ -55,7 +55,7 @@ class StudentController extends BaseController {
                 "file"=>urlencode($topics[$i]->file)
             );
         }
-        return json_encode(urldecode($export));
+        return urldecode(json_encode($export));
 	}
 
 }
