@@ -17,7 +17,7 @@ class PostController extends BaseController {
 
 
 	public function weekget($page){
-	if(Week::take(10)->skip(($page-1)*10)->orderBy("id","desc")->count()>0){
+	if((Week::all()->count())>($page-1)*10){
         	$weeks=Week::take(10)->skip(($page-1)*10)->orderBy("id","desc")->get();
         	for($i=0;$i<count($weeks);$i++){
             		$export[]=array(

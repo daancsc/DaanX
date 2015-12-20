@@ -45,6 +45,7 @@ class StudentController extends BaseController {
 	}
 
 	public function forumget($page){
+	if(Topic::all()->count()>($page-1)*10){
         $topics=Topic::take(10)->skip(($page-1)*10)->orderBy("id","desc")->get();
         for($i=0;$i<count($topics);$i++){
             $writer=Student::find($topics[$i]->stu_id);
@@ -56,6 +57,14 @@ class StudentController extends BaseController {
             );
         }
         return urldecode(json_encode($export));
+	}else{
+		$export[]=array(
+                "title"=>" ",
+                "writer"=>" ",
+                "body"=>" ",
+                "file"=>" "
+            );
+		return urldecode(json_encode($export));
 	}
-
+	}
 }
