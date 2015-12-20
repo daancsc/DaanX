@@ -45,7 +45,7 @@ class StudentController extends BaseController {
 	}
 
 	public function forumget($page){
-        $topics=Topic::take(10)->skip(($page-1)*10)->get();
+        $topics=Topic::take(10)->skip(($page-1)*10)->orderBy("id","desc")->get();
         for($i=0;$i<count($topics);$i++){
             $writer=Student::find($topics[$i]->stu_id);
             $export[]=array(

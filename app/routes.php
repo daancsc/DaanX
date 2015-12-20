@@ -18,6 +18,9 @@ Route::get('/', function()
 
 Route::post('/register','StudentController@register');
 
+Route::get('/post/week/{page}','PostController@weekget');
+
+
 Route::group(array('before' => 'stu_login'), function()
 {
 //	Route::get('/student','RouteController@chooselist');
