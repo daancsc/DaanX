@@ -18,7 +18,15 @@ Route::get('/', function()
 
 Route::post('/register','StudentController@register');
 
-Route::get('/post/week/{page}','PostController@weekget');
+Route::get('/post/week/{page}','PostController@weekget');//最新公告
+
+Route::get('/post/newsstu/{page}','PostController@newsstuget');//學生公告
+
+Route::get('/post/term/{page}','PostController@termget');//新學期公告
+
+Route::get('/post/race/{page}','PostController@raceget');//競賽公告
+
+Route::get('/post/bonus/{page}','PostController@bonusget');//獎金公告
 
 
 Route::group(array('before' => 'stu_login'), function()
