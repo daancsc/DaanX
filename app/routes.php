@@ -28,6 +28,7 @@ Route::get('/post/race/{page}','PostController@raceget');//競賽公告
 
 Route::get('/post/bonus/{page}','PostController@bonusget');//獎金公告
 
+Route::get('/calc/{year}/{month}/{page}','CalcController@bonusget');//獎金公告
 
 Route::group(array('before' => 'stu_login'), function()
 {
