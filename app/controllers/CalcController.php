@@ -15,29 +15,6 @@ class CalcController extends BaseController {
 	|
 	*/
 	public function calcget($year,$month){
-		/*
-		if((Calc::all()->count())>($year-1)*4){
-			$calc=Calc::->take(4)->skip(($year-1)*4)->orderBy("id","desc")->get();
-				for($i=0;$i<count($calc);$i++){
-					if ($year>2015&&$year<2099&&$month>0&&$month<12){
-						$year=trim($calc[$i]->year);
-						$month=trim($calc[$i]->month);
-							$export[]=array(
-	                						"day"=>urlencode(trim($calc[$i]->day)),
-	                						"commit"=>urlencode(trim($calc[$i]->commit))
-	            					);
-					}
-				}
-		}
-		return urldecode(json_encode($export));
-		else{
-			$export[]=array(
-	                	"day"=>" ",
-	                	"commit"=>" "
-	            	);
-			return urldecode(json_encode($export));
-		}
-		*/
 		if (Clac::all()->count()>0) {
 			$calc=Clac::where('year','=','$year')->where('month','=','$month')->get();
 				for ($i=0; $i <count($calc) ; $i++) {
@@ -47,7 +24,6 @@ class CalcController extends BaseController {
 							"day"=>urlencode($calc[$i]->day),
 							"commit"=>urlencode($calc[$i]->commit)
 						);
-
 				}
 		}
 		return urldecode(json_encode($export));
