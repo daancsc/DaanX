@@ -14,32 +14,6 @@ class CalcController extends BaseController {
 	|	Route::get('/', 'HomeController@showWelcome');
 	|
 	*/
-	/*
-	public function calcget($page){
-		if((Calc::all()->count())>($page-1)*10){
-	 		$calc=Calc::take(10)->skip(($page-1)*10)->orderBy("id","desc")->get();
-			for($i=0;$i<count($calc);$i++){
-				$year=trim($calc[$i]->year);
-				$month=trim($calc[$i]->month);
-					$export[]=array(
-	                						"year"=>urlencode(trim($calc[$i]->year)),
-	                						"month"=>urlencode(trim($calc[$i]->month)),
-	                						"day"=>urlencode(trim($calc[$i]->day)),
-	                						"commit"=>urlencode(trim($calc[$i]->commit))
-	            			);
-	        	}
-	        	return urldecode(json_encode($export));
-		}else{
-			$export[]=array(
-	                	"year"=>" ",
-	                	"month"=>" ",
-	                	"day"=>" ",
-	                	"commit"=>" "
-	            	);
-			return urldecode(json_encode($export));
-		}
-	}
-	*/
 	public function calcget($year,$month){
 		if((Calc::all()->count())>($year-1)*4){
 			$calc=Calc::->take(4)->skip(($year-1)*4)->orderBy("id","desc")->get();
