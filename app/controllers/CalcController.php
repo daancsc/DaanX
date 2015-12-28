@@ -15,27 +15,40 @@ class CalcController extends BaseController {
 	|
 	*/
 	public function calcget($year,$month){
-		if (Clac::all()->count()>0) {
-			$calc=Clac::where('year','=','$year')->where('month','=','$month')->get();
-				for ($i=0; $i <count($calc) ; $i++) {
-					$export[]=array(
-							"year"=>urlencode($calc[$i]->year),
-							"month"=>urlencode($calc[$i]->month),
-							"day"=>urlencode($calc[$i]->day),
-							"commit"=>urlencode($calc[$i]->commit)
-						);
-				}
+        $temps="";
+		if($year%400==0||(($year%4==0)&&($year%100!=0))){
+			$monthDay=array(31,29,31,30,31,30,31,31,30,31,30,31);
+		}else{
+			$monthDay=array(31,28,31,30,31,30,31,31,30,31,30,31);
+		}
+		if (Calc::where('year','=',$year)->where('month','=',$month)->count()>0) {
+			for($i=1;$i<($monthDay[$month-1]+1);$i++){
+                if(Calc::where('year','=',$year)->where('month','=',$month)->where('day','=',$i)->count()>0){
+                    $calc=Calc::where('year','=',$year)->where('month','=',$month)->where('day','=',$i)->get();
+                    for($y=0;$y<count($calc);$y++){
+                        $temps[]=$calc[$y]->commit;
+                    }
+                    $temp=implode("\n",$temps);
+                    $export[]=array(
+                        "day"=>$i,
+                        "commit"=>urlencode($temp)
+                    );
+                }else{
+                    $export[]=array(
+                        "day"=>$i,
+                        "commit"=>" "
+                    );
+                }
+			}
+		} else{
+			$export[]=array(
+					"year"=>" ",
+					"month"=>" ",
+					"day"=>" ",
+					"commit"=>" "
+				);
 		}
 		return urldecode(json_encode($export));
-		else{
-			$export[]=array(
-					"year"=" ",
-					"month"=" ",
-					"day"=" ",
-					"commit"=" "
-				);
-			return urldecode(json_encode($export));
-		}
 	}
 
 }
