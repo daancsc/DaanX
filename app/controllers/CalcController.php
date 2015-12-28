@@ -39,6 +39,7 @@ class CalcController extends BaseController {
                         "commit"=>" "
                     );
                 }
+                $temps="";
 			}
 		} else{
 			$export[]=array(
