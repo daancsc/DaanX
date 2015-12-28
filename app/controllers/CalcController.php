@@ -28,7 +28,7 @@ class CalcController extends BaseController {
                     for($y=0;$y<count($calc);$y++){
                         $temps[]=$calc[$y]->commit;
                     }
-                    $temp=implode("\n",$temps);
+                    $temp=implode("\\n",$temps);
                     $export[]=array(
                         "day"=>$i,
                         "commit"=>urlencode($temp)
