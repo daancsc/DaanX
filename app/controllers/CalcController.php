@@ -30,11 +30,15 @@ class CalcController extends BaseController {
                     }
                     $temp=implode("\\n",$temps);
                     $export[]=array(
+                        "year"=>$year,
+                        "month"=>$month,
                         "day"=>$i,
                         "commit"=>urlencode($temp)
                     );
                 }else{
                     $export[]=array(
+                        "year"=>$year,
+                        "month"=>$month,
                         "day"=>$i,
                         "commit"=>" "
                     );
