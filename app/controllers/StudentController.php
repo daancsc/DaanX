@@ -44,27 +44,20 @@ class StudentController extends BaseController {
 		}
 	}
 
-	public function forumget($page){
-	if(Topic::all()->count()>($page-1)*10){
-        $topics=Topic::take(10)->skip(($page-1)*10)->orderBy("id","desc")->get();
-        for($i=0;$i<count($topics);$i++){
-            $writer=Student::find($topics[$i]->stu_id);
-            $export[]=array(
-                "title"=>urlencode($topics[$i]->title),
-                "writer"=>urlencode($writer->nick),
-                "body"=>urlencode($topics[$i]->body),
-                "file"=>urlencode($topics[$i]->file)
-            );
-        }
-        return urldecode(json_encode($export));
-	}else{
-		$export[]=array(
-                "title"=>" ",
-                "writer"=>" ",
-                "body"=>" ",
-                "file"=>" "
-            );
-		return urldecode(json_encode($export));
-	}
-	}
+    public function feedback(){
+        $writer=Student::where('auth','=',Input::get('auth'))->first();
+        $feedClass=Input::get('class');
+        $commit=Input::get('commit');
+        $system=Input::get('system');
+
+        $feedback=new Feedback;
+        $feedback->feedClass=$feedClass;
+        $feedback->commit=$commit;
+        $feedback->stu_id=$writer->id;
+        $feedback->system=$system;
+        $feedback->checked=0;
+        $feedback->save();
+
+        return "suc";
+    }
 }
