@@ -5,4 +5,5 @@ Class Student extends Eloquent {
 
     protected $fillable = array('account', 'nick', 'email','auth','name');
 
+
 }

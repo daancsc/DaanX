@@ -23,9 +23,9 @@ class ForumController extends BaseController {
                 $export[]=array(
 		    "id"=>urlencode($topics[$i]->id),
                     "title"=>urlencode(addslashes($topics[$i]->title)),
-                    "writer"=>urlencode($writer->nick),
+                    "writer"=>urlencode(addslashes($writer->nick)),
                     "body"=>urlencode(base64_encode($topics[$i]->body)),
-                    "file"=>urlencode($topics[$i]->file)
+                    "file"=>urlencode(addslashes($topics[$i]->file))
                 );
             }
         }else{
@@ -71,17 +71,17 @@ class ForumController extends BaseController {
             }
             $writer = Student::find($topic->stu_id);
             $export[] = array(
-                "title" => addslashes(urlencode($topic->title)),
-                "writer" => urlencode($writer->nick),
-                "body" => urlencode(base64_encode($topic->body)),
-                "file" => urlencode($topic->file)
+                "title" => urlencode(addslashes($topic->title)),
+                "writer" => urlencode(addslashes($writer->nick)),
+                "body" => urlencode(addslashes(base64_encode($topic->body))),
+                "file" => urlencode(addslashes($topic->file))
             );
             if($commit[0]!="無留言") {
                 for ($i = 0; $i < count($commit); $i++) {
                     $export[] = array(
                         "title" => "",
-                        "writer" => urlencode(Student::find($commit[$i]->stu_id)->nick),
-                        "body" => addslashes(urlencode($commit[$i]->body)),
+                        "writer" => urlencode(addslashes(Student::find($commit[$i]->stu_id)->nick)),
+                        "body" => urlencode(addslashes($commit[$i]->body)),
                         "file" => ""
                     );
                 }
