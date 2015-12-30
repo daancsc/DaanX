@@ -104,9 +104,9 @@ class ForumController extends BaseController {
         $sn=Topic::max('sn')+1;
         $body=base64_decode($data->body);	
 
-	$topics=Topic::find($id);
-	$topics->sn=$sn;
-	$topics->save();
+        $topics=Topic::find($id);
+        $topics->sn=$sn;
+        $topics->save();
 
         $commit=new Commit;
         $commit->stu_id=$writer->id;
