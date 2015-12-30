@@ -60,6 +60,8 @@ class ForumController extends BaseController {
     public function forumId($id){
         if(Topic::where('id','=',$id)->count()>0) {
             $topic = Topic::find($id);
+	    $topic->view=($topic->view+1);
+	    $topic->save();
             if (Commit::where('topic_id', '=', $id)->count() > 0) {
                 $commit = Commit::where('topic_id', '=', $id)->get();
             } else {
@@ -99,7 +101,11 @@ class ForumController extends BaseController {
         $data=json_decode($json);
         $writer=Student::where('auth','=',$data['auth'])->first();
         $sn=Topic::max('sn')+1;
-        $body=base64_decode($data['body']);
+        $body=base64_decode($data['body']);	
+
+	$topics=Topic::find($topic);
+	$topics->sn=$sn;
+	$topics->save();
 
         $commit=new Commit;
         $commit->stu_id=$writer->id;
