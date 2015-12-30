@@ -32,9 +32,13 @@ Route::get('/calc/{year}/{month}','CalcController@calcget');//獎金公告
 
 Route::group(array('before' => 'stu_login'), function()
 {
-//	Route::get('/student','RouteController@chooselist');
-	Route::get('/forum/main/{page}','StudentController@forumget');
+    Route::post('/feedback','StudentController@feedback');
 
+    Route::get('/forum/main/{page}','ForumController@forumget');
+    Route::post('/forum/main','ForumController@forumWrite');
+
+    Route::get('/forum/main/id/{id}','ForumController@forumId');
+    Route::post('/forum/main/id/{id}','ForumController@forumIdWrite');
 });
 
 
