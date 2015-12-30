@@ -22,10 +22,10 @@ class ForumController extends BaseController {
                 $writer=Student::find($topics[$i]->stu_id);
                 $export[]=array(
 		    "id"=>urlencode($topics[$i]->id),
-                    "title"=>urlencode(str_replace("\\'","'",addslashes($topics[$i]->title))),
-                    "writer"=>urlencode(str_replace("\\'","'",addslashes($writer->nick))),
+                    "title"=>urlencode(addslashes($topics[$i]->title)),
+                    "writer"=>urlencode(addslashes($writer->nick)),
                     "body"=>urlencode(base64_encode($topics[$i]->body)),
-                    "file"=>urlencode(str_replace("\\'","'",addslashes($topics[$i]->file)))
+                    "file"=>urlencode(addslashes($topics[$i]->file))
                 );
             }
         }else{
@@ -71,17 +71,17 @@ class ForumController extends BaseController {
             }
             $writer = Student::find($topic->stu_id);
             $export[] = array(
-                "title" => urlencode(str_replace("\\'","'",addslashes($topic->title))),
-                "writer" => urlencode(str_replace("\\'","'",addslashes($writer->nick))),
+                "title" => urlencode(addslashes($topic->title)),
+                "writer" => urlencode(addslashes($writer->nick)),
                 "body" => urlencode(base64_encode($topic->body)),
-                "file" => urlencode(str_replace("\\'","'",addslashes($topic->file)))
+                "file" => urlencode(addslashes($topic->file))
             );
             if($commit[0]!="無留言") {
                 for ($i = 0; $i < count($commit); $i++) {
                     $export[] = array(
                         "title" => "",
-                        "writer" => urlencode(str_replace("\\'","'",addslashes(Student::find($commit[$i]->stu_id)->nick))),
-                        "body" => urlencode(str_replace("\\'","'",addslashes($commit[$i]->body))),
+                        "writer" => urlencode(addslashes(Student::find($commit[$i]->stu_id)->nick)),
+                        "body" => urlencode(addslashes($commit[$i]->body)),
                         "file" => ""
                     );
                 }
