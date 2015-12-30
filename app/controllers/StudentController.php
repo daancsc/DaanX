@@ -20,7 +20,7 @@ class StudentController extends BaseController {
         $lastHolDate=Setting::where('item','=','lastHolDate')->first()->value;
         $export[]=array(
             "id"=>" ",
-            "title"=>$lastHolDate,
+            "title"=>$lastHolText,
             "day"=>$lastHolDate,
             "writer"=>" ",
             "body"=>" ",
