@@ -16,6 +16,8 @@ Route::get('/', function()
 	return "Hello";
 });
 
+Route::get('/main','StudentController@Welcome');
+
 Route::post('/register','StudentController@register');
 
 Route::get('/post/week/{page}','PostController@weekget');//最新公告

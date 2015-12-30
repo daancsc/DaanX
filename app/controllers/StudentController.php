@@ -15,6 +15,41 @@ class StudentController extends BaseController {
 	|
 	*/
 
+    public function Welcome(){
+        if((Newsstu::all()->count())>0){
+            $newsstu=Newsstu::take(2)->orderBy("id","desc")->get();
+            for($i=0;$i<count($newsstu);$i++){
+                $export[]=array(
+                    "id"=>" ",
+                    "title"=>urlencode(trim($newsstu[$i]->web_main_top_title)),
+                    "day"=>urlencode(trim($newsstu[$i]->web_main_top_day)),
+                    "writer"=>urlencode(trim($newsstu[$i]->web_main_where)),
+                    "body"=>urlencode(base64_encode($newsstu[$i]->web_main_data)),
+                    "file"=>urlencode(trim($newsstu[$i]->web_main_link)),
+                    "image"=>urlencode(trim($newsstu[$i]->web_main_file)),
+                    "link"=>urlencode(trim($newsstu[$i]->web_main_outside_link))
+                );
+            }
+        }
+        if(Topic::all()->count()>0){
+            $topics=Topic::take(2)->orderBy("sn","desc")->get();
+            for($i=0;$i<count($topics);$i++){
+                $writer=Student::find($topics[$i]->stu_id);
+                $export[]=array(
+                    "id"=>urlencode($topics[$i]->id),
+                    "title"=>urlencode(addslashes($topics[$i]->title)),
+                    "day"=>" ",
+                    "writer"=>urlencode(addslashes($writer->nick)),
+                    "body"=>urlencode(base64_encode($topics[$i]->body)),
+                    "file"=>urlencode(addslashes($topics[$i]->file)),
+                    "image"=>" ",
+                    "link"=>" "
+                );
+            }
+        }
+        return urldecode(json_encode($export));
+    }
+
 	public function register()
 	{
 		$id=Input::get('stu_id');
