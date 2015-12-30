@@ -74,7 +74,6 @@ class StudentController extends BaseController {
 			$student->nick=$nick;
 			$student->email=$email;
 			$student->account=$id;
-			$student->save();
             $auth=str_random(20);
             while(true) {
                 if (Student::where("auth", "=", $auth)->count() == 0) {
@@ -82,6 +81,7 @@ class StudentController extends BaseController {
                     break;
                 } else {$auth = str_random(20);}
             }
+            $student->save();
 			return $auth;
 		}else{
 			$student=new Student;
