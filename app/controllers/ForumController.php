@@ -21,14 +21,16 @@ class ForumController extends BaseController {
             for($i=0;$i<count($topics);$i++){
                 $writer=Student::find($topics[$i]->stu_id);
                 $export[]=array(
-                    "title"=>urlencode($topics[$i]->title),
+		    "id"=>urlencode($topics[$i]->id),
+                    "title"=>urlencode(addslashes($topics[$i]->title)),
                     "writer"=>urlencode($writer->nick),
-                    "body"=>urlencode($topics[$i]->body),
+                    "body"=>urlencode(base64_encode($topics[$i]->body)),
                     "file"=>urlencode($topics[$i]->file)
                 );
             }
         }else{
             $export[]=array(
+		    "id"=>" ",
                     "title"=>" ",
                     "writer"=>" ",
                     "body"=>" ",
@@ -41,13 +43,13 @@ class ForumController extends BaseController {
     public function forumWrite(){
         $json=Input::get('json');
         $data=json_decode($json);
-        $writer=Student::where('auth','=',$data['auth'])->first();
+        $writer=Student::where('auth','=',$data->auth)->first();
         $sn=Topic::max('sn')+1;
-        $body=base64_decode($data['body']);
+        $body=base64_decode($data->body);
 
         $topic=new Topic;
         $topic->sn=$sn;
-        $topic->title=$data['title'];
+        $topic->title=$data->title;
         $topic->stu_id=$writer->id;
         $topic->day=date("Y/m/d");
         $topic->body=$body;
@@ -67,11 +69,11 @@ class ForumController extends BaseController {
             } else {
                 $commit = array("無留言");
             }
-            $writer = Student::find($topic->stU_id);
+            $writer = Student::find($topic->stu_id);
             $export[] = array(
-                "title" => urlencode($topic->title),
+                "title" => addslashes(urlencode($topic->title)),
                 "writer" => urlencode($writer->nick),
-                "body" => urlencode($topic->body),
+                "body" => urlencode(base64_encode($topic->body)),
                 "file" => urlencode($topic->file)
             );
             if($commit[0]!="無留言") {
@@ -79,7 +81,7 @@ class ForumController extends BaseController {
                     $export[] = array(
                         "title" => "",
                         "writer" => urlencode(Student::find($commit[$i]->stu_id)->nick),
-                        "body" => urlencode($commit[$i]->body),
+                        "body" => addslashes(urlencode($commit[$i]->body)),
                         "file" => ""
                     );
                 }
@@ -97,19 +99,18 @@ class ForumController extends BaseController {
 
     public function forumIdWrite($id){
         $json=Input::get('json');
-        $topic=Input::get('topic_id');
         $data=json_decode($json);
-        $writer=Student::where('auth','=',$data['auth'])->first();
+        $writer=Student::where('auth','=',$data->auth)->first();
         $sn=Topic::max('sn')+1;
-        $body=base64_decode($data['body']);	
+        $body=base64_decode($data->body);	
 
-	$topics=Topic::find($topic);
+	$topics=Topic::find($id);
 	$topics->sn=$sn;
 	$topics->save();
 
         $commit=new Commit;
         $commit->stu_id=$writer->id;
-        $commit->topic_id=$topic;
+        $commit->topic_id=$id;
         $commit->body=$body;
         $commit->save();
 

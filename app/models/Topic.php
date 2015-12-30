@@ -5,4 +5,5 @@ Class Topic extends Eloquent {
 
     protected $fillable = array('sn','title', 'stu_id', 'body','view','day');
 
+    public $timestamps=false;
 }

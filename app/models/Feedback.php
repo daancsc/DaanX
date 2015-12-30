@@ -5,4 +5,5 @@ Class Feedback extends Eloquent {
 
     protected $fillable = array('feedClass','commit','stu_id','checked','system');
 
+    public $timestamps=false;
 }

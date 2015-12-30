@@ -5,4 +5,5 @@ Class Commit extends Eloquent {
 
     protected $fillable = array('stu_id','topic_id','body');
 
+    public $timestamps=false;
 }
