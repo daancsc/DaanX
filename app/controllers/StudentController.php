@@ -16,6 +16,18 @@ class StudentController extends BaseController {
 	*/
 
     public function Welcome(){
+        $lastHolText=Setting::where('item','=','lastHolText')->first()->value;
+        $lastHolDate=Setting::where('item','=','lastHolDate')->first()->value;
+        $export[]=array(
+            "id"=>" ",
+            "title"=>$lastHolDate,
+            "day"=>$lastHolDate,
+            "writer"=>" ",
+            "body"=>" ",
+            "file"=>" ",
+            "image"=>" ",
+            "link"=>" "
+        );
         if((Newsstu::all()->count())>0){
             $newsstu=Newsstu::take(2)->orderBy("id","desc")->get();
             for($i=0;$i<count($newsstu);$i++){
