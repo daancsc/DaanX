@@ -25,7 +25,9 @@ class ForumController extends BaseController {
                     "title"=>urlencode(str_replace("\\'","'",addslashes($topics[$i]->title))),
                     "writer"=>urlencode(str_replace("\\'","'",addslashes($writer->nick))),
                     "body"=>urlencode(str_replace("\\'","'",base64_encode($topics[$i]->body))),
-                    "file"=>urlencode(str_replace("\\'","'",addslashes($topics[$i]->file)))
+                    "file"=>urlencode(str_replace("\\'","'",addslashes($topics[$i]->file))),
+                    "date"=>$topics[$i]->day,
+                    "view"=>$topics[$i]->view
                 );
             }
         }else{
@@ -34,7 +36,9 @@ class ForumController extends BaseController {
                     "title"=>" ",
                     "writer"=>" ",
                     "body"=>" ",
-                    "file"=>" "
+                    "file"=>" ",
+                    "date"=>" ",
+                    "view"=>" "
                 );
         }
         return urldecode(json_encode($export));
@@ -74,7 +78,9 @@ class ForumController extends BaseController {
                 "title" => urlencode(str_replace("\\'","'",addslashes($topic->title))),
                 "writer" => urlencode(str_replace("\\'","'",addslashes($writer->nick))),
                 "body" => urlencode(str_replace("\\'","'",base64_encode($topic->body))),
-                "file" => urlencode(str_replace("\\'","'",addslashes($topic->file)))
+                "file" => urlencode(str_replace("\\'","'",addslashes($topic->file))),
+                "date"=>$topic->day,
+                "view"=>$topic->view
             );
             if($commit[0]!="無留言") {
                 for ($i = 0; $i < count($commit); $i++) {
@@ -82,7 +88,8 @@ class ForumController extends BaseController {
                         "title" => "",
                         "writer" => urlencode(str_replace("\\'","'",addslashes(Student::find($commit[$i]->stu_id)->nick))),
                         "body" => urlencode(str_replace("\\'","'",addslashes($commit[$i]->body))),
-                        "file" => ""
+                        "file" => "",
+                        "date" =>$commit[$i]->day
                     );
                 }
             }
@@ -91,7 +98,8 @@ class ForumController extends BaseController {
                 "title"=>" ",
                 "writer"=>" ",
                 "body"=>" ",
-                "file"=>" "
+                "file"=>" ",
+                "day" =>" "
             );
         }
         return urldecode(json_encode($export));
@@ -112,6 +120,7 @@ class ForumController extends BaseController {
         $commit->stu_id=$writer->id;
         $commit->topic_id=$id;
         $commit->body=$body;
+        $commit->day=date("Y/m/d");
         $commit->save();
 
         return "suc";
