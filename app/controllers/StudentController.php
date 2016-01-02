@@ -71,7 +71,7 @@ class StudentController extends BaseController {
 		if(Student::where("account", "=", $id)->count()>0){
 			$student=Student::where("account", "=", $id)->first();
 			$student->name=$name;
-			$student->nick=$nick;
+			$student->nick=str_replace("root","**",str_replace("admin","*",str_replace("管理員","***",$nick)));
 			$student->email=$email;
 			$student->account=$id;
             $auth=$student->auth;
@@ -80,7 +80,7 @@ class StudentController extends BaseController {
 		}else{
 			$student=new Student;
 			$student->name=$name;
-			$student->nick=$nick;
+			$student->nick=str_replace("root","**",str_replace("admin","*",str_replace("管理員","***",$nick)));
 			$student->email=$email;
 			$student->account=$id;
 			$auth=str_random(20);
@@ -100,7 +100,7 @@ class StudentController extends BaseController {
         $auth=Input::get('auth');
         $nick=Input::get('nick');
         $student=Student::where("auth", "=", $auth)->first();
-        $student->nick=$nick;
+        $student->nick=str_replace("root","**",str_replace("admin","*",str_replace("管理員","***",$nick)));
         $student->save();
 
         return "suc";
