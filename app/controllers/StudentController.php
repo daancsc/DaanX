@@ -96,6 +96,16 @@ class StudentController extends BaseController {
 		}
 	}
 
+    public function nickWrite(){
+        $auth=Input::get('auth');
+        $nick=Input::get('nick');
+        $student=Student::where("auth", "=", $auth)->first();
+        $student->nick=$nick;
+        $student->save();
+
+        return "suc";
+    }
+
     public function feedback(){
         $writer=Student::where('auth','=',Input::get('auth'))->first();
         $feedClass=Input::get('class');

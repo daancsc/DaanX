@@ -41,6 +41,8 @@ Route::group(array('before' => 'stu_login'), function()
 
     Route::get('/forum/main/id/{id}','ForumController@forumId');
     Route::post('/forum/main/id/{id}','ForumController@forumIdWrite');
+
+    Route::post('/register/nick','StudentController@nickWrite');
 });
 
 
