@@ -17,8 +17,8 @@ class PostController extends BaseController {
 
 
 	public function weekget($page){
-		if((Week::all()->count())>($page-1)*10){
-	 	$weeks=Week::take(10)->skip(($page-1)*10)->orderBy("id","desc")->get();
+		if((Week::all()->count())>($page-1)*20){
+	 	$weeks=Week::take(20)->skip(($page-1)*20)->orderBy("id","desc")->get();
 		for($i=0;$i<count($weeks);$i++){
 	            		$export[]=array(
 	                		"title"=>urlencode(trim($weeks[$i]->web_main_top_title)),
@@ -46,8 +46,8 @@ class PostController extends BaseController {
 	}
 
 	public function newsstuget($page){
-		if((Newsstu::all()->count())>($page-1)*10){
-	 	$newsstu=Newsstu::take(10)->skip(($page-1)*10)->orderBy("id","desc")->get();
+		if((Newsstu::all()->count())>($page-1)*20){
+	 	$newsstu=Newsstu::take(20)->skip(($page-1)*20)->orderBy("id","desc")->get();
 		for($i=0;$i<count($newsstu);$i++){
 	            		$export[]=array(
 	                		"title"=>urlencode(trim($newsstu[$i]->web_main_top_title)),
@@ -75,8 +75,8 @@ class PostController extends BaseController {
 	}
 
 	public function termget($page){
-		if((Term::all()->count())>($page-1)*10){
-	 	$term=Term::take(10)->skip(($page-1)*10)->orderBy("id","desc")->get();
+		if((Term::all()->count())>($page-1)*20){
+	 	$term=Term::take(20)->skip(($page-1)*20)->orderBy("id","desc")->get();
 		for($i=0;$i<count($term);$i++){
 	            		$export[]=array(
 	                		"title"=>urlencode(trim($term[$i]->web_main_top_title)),
@@ -104,8 +104,8 @@ class PostController extends BaseController {
 	}
 
 	public function raceget($page){
-		if((Race::all()->count())>($page-1)*10){
-	 	$race=Race::take(10)->skip(($page-1)*10)->orderBy("id","desc")->get();
+		if((Race::all()->count())>($page-1)*20){
+	 	$race=Race::take(20)->skip(($page-1)*20)->orderBy("id","desc")->get();
 		for($i=0;$i<count($race);$i++){
 	            		$export[]=array(
 	                		"title"=>urlencode(trim($race[$i]->web_main_top_title)),
@@ -133,8 +133,8 @@ class PostController extends BaseController {
 	}
 
 	public function bonusget($page){
-		if((Bonus::all()->count())>($page-1)*10){
-	 	$bonus=Bonus::take(10)->skip(($page-1)*10)->orderBy("id","desc")->get();
+		if((Bonus::all()->count())>($page-1)*20){
+	 	$bonus=Bonus::take(20)->skip(($page-1)*20)->orderBy("id","desc")->get();
 		for($i=0;$i<count($bonus);$i++){
 	            		$export[]=array(
 	                		"title"=>urlencode(trim($bonus[$i]->web_main_top_title)),

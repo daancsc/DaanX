@@ -16,8 +16,8 @@ class ForumController extends BaseController {
 	*/
 
 	public function forumget($page){
-        if(Topic::all()->count()>($page-1)*10){
-            $topics=Topic::take(10)->skip(($page-1)*10)->orderBy("sn","desc")->get();
+        if(Topic::all()->count()>($page-1)*20){
+            $topics=Topic::take(20)->skip(($page-1)*20)->orderBy("sn","desc")->get();
             for($i=0;$i<count($topics);$i++){
                 $writer=Student::find($topics[$i]->stu_id);
                 $export[]=array(
