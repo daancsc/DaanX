@@ -87,7 +87,7 @@ class ForumController extends BaseController {
                     $export[] = array(
                         "title" => "",
                         "writer" => urlencode(str_replace("\\'","'",addslashes(Student::find($commit[$i]->stu_id)->nick))),
-                        "body" => base64_encode($commit[$i]->body),
+                        "body" => urlencode(str_replace("\\'","'",base64_encode($commit[$i]->body))),
                         "file" => " ",
                         "date" =>$commit[$i]->day
                     );
