@@ -26,7 +26,8 @@ class StudentController extends BaseController {
             "body"=>" ",
             "file"=>" ",
             "image"=>" ",
-            "link"=>" "
+            "link"=>" ",
+            "view"=>" "
         );
         if((Newsstu::all()->count())>0){
             $newsstu=Newsstu::take(2)->orderBy("id","desc")->get();
@@ -39,7 +40,8 @@ class StudentController extends BaseController {
                     "body"=>urlencode(base64_encode($newsstu[$i]->web_main_data)),
                     "file"=>urlencode(trim($newsstu[$i]->web_main_link)),
                     "image"=>urlencode(trim($newsstu[$i]->web_main_file)),
-                    "link"=>urlencode(trim($newsstu[$i]->web_main_outside_link))
+                    "link"=>urlencode(trim($newsstu[$i]->web_main_outside_link)),
+                    "view"=>" "
                 );
             }
         }
@@ -55,7 +57,8 @@ class StudentController extends BaseController {
                     "body"=>urlencode(base64_encode($topics[$i]->body)),
                     "file"=>urlencode(addslashes($topics[$i]->file)),
                     "image"=>" ",
-                    "link"=>" "
+                    "link"=>" ",
+                    "view"=>urlencode($topics[$i]->view)
                 );
             }
         }
