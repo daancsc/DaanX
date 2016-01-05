@@ -102,11 +102,15 @@ class StudentController extends BaseController {
     public function nickWrite(){
         $auth=Input::get('auth');
         $nick=Input::get('nick');
-        $student=Student::where("auth", "=", $auth)->first();
-        $student->nick=str_replace("root","**",str_replace("admin","*",str_replace("管理員","***",$nick)));
-        $student->save();
+	if(strlen($nick)>0){
+        	$student=Student::where("auth", "=", $auth)->first();
+        	$student->nick=str_replace("root","**",str_replace("admin","*",str_replace("管理員","***",$nick)));
+        	$student->save();
 
-        return "suc";
+        	return "suc";
+	}else{
+		return Response::json(array('error'=>" "),404);
+	} 
     }
 
     public function feedback(){
