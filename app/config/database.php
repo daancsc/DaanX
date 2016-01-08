@@ -57,7 +57,7 @@ return array(
 			'host'      => 'localhost',
 			'database'  => 'DaanX',
 			'username'  => 'DaanX',
-			'password'  => 'ffMmQ2Nze2VNsHEn',
+			'password'  => 'CSuvnTUGpXKP2rNb',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',
